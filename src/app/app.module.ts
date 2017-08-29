@@ -1,30 +1,43 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { HttpModule } from '@angular/http';
+import { NgModule, ErrorHandler } from '@angular/core';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { IonicStorageModule } from '@ionic/storage';
+
+import { SermonLibraryApp } from './app.component';
+
+import { ConferenceData } from '../providers/conference-data';
+import { UserData } from '../providers/user-data';
+import { SermonsProvider } from '../providers/sermons/sermons';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    SermonLibraryApp
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(SermonLibraryApp, {
+      preloadModules: true
+    }),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    SermonLibraryApp
   ],
   providers: [
-    StatusBar,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ConferenceData,
+    UserData,
+    InAppBrowser,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    SermonsProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
