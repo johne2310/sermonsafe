@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Sermon Details</ion-title>
   </ion-navbar>
 
@@ -15,14 +15,14 @@
 
 <ion-content padding>
 
-  <ion-card padding>
+  <ion-card>
     <ion-card-header>
       {{ sermon.title }}
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col col-2>
+          <ion-col col-auto>
             <strong>Title</strong>
           </ion-col>
           <ion-col>
@@ -30,7 +30,7 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-2>
+          <ion-col col-auto>
             <strong>Description</strong> :
           </ion-col>
           <ion-col>

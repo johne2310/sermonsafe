@@ -1,6 +1,10 @@
 page-sermon-details {
-    ion-card ion-card-header {
-        background-color: rgba(243, 243, 243, 0.95);
-        font-weight: bold;
-    }
+  ion-card-header {
+    background-color: #478aff; // rgba(243, 243, 243, 0.95);
+    font-weight: bold;
+    text-decoration-color: white;
+  }
+  ion-card-header.card-header {
+    color: #fff;
+  }
 }
