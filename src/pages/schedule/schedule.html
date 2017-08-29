@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar no-border-bottom>
+  <ion-navbar color="primary" no-border-bottom>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -21,10 +21,7 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-searchbar color="primary"
-                   [(ngModel)]="queryText"
-                   (ionInput)="updateSchedule()"
-                   placeholder="Search">
+    <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -67,7 +64,7 @@
   </ion-list>
 
   <ion-list-header [hidden]="shownSessions > 0">
-      No Sessions Found
+    No Sessions Found
   </ion-list-header>
 
   <ion-fab bottom right #fab>
