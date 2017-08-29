@@ -2,5 +2,7 @@
   "name": "sermonsafe",
   "app_id": "0225f458",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    // "cordova": {}
+  }
 }
