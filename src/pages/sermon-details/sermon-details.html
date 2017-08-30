@@ -23,7 +23,7 @@
       <ion-grid>
         <ion-row>
           <ion-col col-auto>
-            <strong>Title</strong>
+            <strong>Title:</strong>
           </ion-col>
           <ion-col>
             {{ sermon.series }}
@@ -31,7 +31,7 @@
         </ion-row>
         <ion-row>
           <ion-col col-auto>
-            <strong>Description</strong> :
+            <strong>Description:</strong>
           </ion-col>
           <ion-col>
             {{ sermon.description }}
@@ -45,8 +45,10 @@
         &nbsp;&nbsp;<strong>References</strong>
       </ion-row>
       <ion-grid *ngFor="let ref of sermon.reference; let i = index">
-        <ion-row>{{i+1}}.&nbsp;&nbsp;{{ ref.book }}&nbsp;{{ ref.chapterFrom }}:{{ref.verseFrom }} - {{ ref.chapterTo }}:{{ ref.verseTo
+        <ion-row *ngIf="ref.chapterTo">{{i+1}}.&nbsp;&nbsp;{{ ref.book }}&nbsp;{{ ref.chapterFrom }}:{{ref.verseFrom }} - {{ ref.chapterTo }}:{{ ref.verseTo
           }}
+        </ion-row>
+        <ion-row *ngIf="!ref.chapterTo">{{i+1}}.&nbsp;&nbsp;{{ ref.book }}&nbsp;{{ ref.chapterFrom }}:{{ref.verseFrom }}
         </ion-row>
       </ion-grid>
 
@@ -62,4 +64,19 @@
 
     </ion-card-content>
   </ion-card>
+
+  <ion-fab bottom right>
+    <button ion-fab color="dark"><ion-icon name="document"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab color="danger" (click)="deleteSermon()"><ion-icon name="md-trash"></ion-icon>
+            </button>
+
+      <button ion-fab color="light" (click)="editSermon()"><ion-icon name="ios-paper-outline"></ion-icon>
+      </button>
+
+      <button ion-fab color="primary" (click)="addSermonToSeries()"><ion-icon name="add-circle"></ion-icon>
+      </button>
+
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
