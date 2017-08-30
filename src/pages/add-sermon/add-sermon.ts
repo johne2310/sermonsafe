@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -9,11 +9,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddSermonPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddSermonPage');
+  }
+
+  closeModal(): void {
+    this.toast.create({
+      message: 'New record cancelled',
+      duration: 1000
+    }).present();
+
+    this.navCtrl.pop();
+  }
+
+  saveSermon(): void {
+
+    //TODO: Add save sermon code here
+    this.toast.create({
+      message: 'Sermon Saved',
+      duration: 2000
+    }).present();
+
+    this.navCtrl.pop();
   }
 
 }

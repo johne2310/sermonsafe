@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, FabContainer } from 'ionic-angular';
 import { Sermons } from '../../models/sermon.interface';
 
 /**
@@ -18,7 +18,7 @@ export class SermonDetailsPage {
 
   public sermon: Sermons;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private toast: ToastController) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, private toast: ToastController, private modalCtrl: ModalController) {
 
     this.sermon = this.navParams.get('sermon');
     console.log('Sermon: ', this.sermon);
@@ -29,7 +29,9 @@ export class SermonDetailsPage {
 
   }
 
-  deleteSermon(): void {
+  deleteSermon(fab: FabContainer): void {
+
+    fab.close();
     console.log('Delete sermon clicked');
     this.toast.create({
       message: 'Sermon deleted',
@@ -37,17 +39,25 @@ export class SermonDetailsPage {
     }).present();
   }
 
-  addSermonToSeries(): void {
+  addSermonToSeries(fab: FabContainer): void {
     console.log('Add sermon clicked');
+
+    fab.close();
+
+    let newSermonModal = this.modalCtrl.create('AddSermonPage');
+    newSermonModal.present();
+
     this.toast.create({
       message: 'Sermon Added',
       duration: 2000
     }).present();
   }
 
-
-  editSermon(): void {
+  editSermon(fab: FabContainer): void {
     console.log('Edit sermon clicked');
+
+    fab.close();
+
     this.toast.create({
       message: 'Sermon Edited',
       duration: 2000
