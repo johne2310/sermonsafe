@@ -46,11 +46,6 @@ export class SermonDetailsPage {
 
     let newSermonModal = this.modalCtrl.create('AddSermonPage');
     newSermonModal.present();
-
-    this.toast.create({
-      message: 'Sermon Added',
-      duration: 2000
-    }).present();
   }
 
   editSermon(fab: FabContainer): void {
