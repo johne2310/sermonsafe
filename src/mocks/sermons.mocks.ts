@@ -3,26 +3,31 @@ import { SermonSeries } from '../models/sermon.interface';
 const sermonList: SermonSeries[] = [
 
     {
+        key$: '1',
         series: 'The Beatitudes',
         category: 'Gospels',
         sermon: [
             {
+                key$: '1a',
                 series: 'The Beatitudes',
                 title: 'Blessed are the Meek',
                 date: new Date(),
                 description: 'Sermon on the Mount - Part 1',
                 location: [
                     {
+                        key$: '1b',
                         date: new Date(),
                         location: 'Salvos 614'
                     },
                     {
+                        key$: '1c',
                         date: new Date(),
                         location: 'Willow Creek'
                     }
                 ],
                 reference: [
                     {
+                        key$: '1d',
                         book: 'Romans',
                         chapterFrom: 1,
                         verseFrom: 1,

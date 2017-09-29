@@ -16,7 +16,7 @@ import { PageInterface } from "../models/page.interface";
 @Component({
   templateUrl: 'app.template.html'
 })
-export class SermonLibraryApp {
+export class SermonSafeApp {
   // the root nav is a child of the root app component
   // @ViewChild(Nav) gets a reference to the app's root nav
   @ViewChild(Nav) nav: Nav;

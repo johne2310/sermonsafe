@@ -9,7 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
 
-import { SermonLibraryApp } from './app.component';
+import { SermonSafeApp } from './app.component';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -17,19 +17,19 @@ import { SermonsProvider } from '../providers/sermons/sermons';
 
 @NgModule({
   declarations: [
-    SermonLibraryApp
+    SermonSafeApp
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(SermonLibraryApp, {
+    IonicModule.forRoot(SermonSafeApp, {
       preloadModules: true
     }),
     IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    SermonLibraryApp
+    SermonSafeApp
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
