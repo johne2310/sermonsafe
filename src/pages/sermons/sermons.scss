@@ -1,9 +1,16 @@
 page-sermons {
-    ion-item ion-label {
-        border-left: 2px solid #EDC225;
-        padding-left: 10px;
-    }
-    ion-item-group ion-item-divider.item {
-        background-color: rgba(252, 249, 249, 0.95);
-    }
+  ion-item ion-label {
+    border-left: 2px solid #EDC225;
+    padding-left: 10px;
+  }
+  ion-item-group ion-item-divider.item {
+    background-color: rgba(252, 251, 249, 0.95);
+  }
+  ion-grid {
+    background-color: #96B5E2;
+    color: #525252;
+  }
+  ion-segment-button.heading {
+    color: #525252;
+  }
 }

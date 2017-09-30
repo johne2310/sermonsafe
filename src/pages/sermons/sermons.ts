@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, IonicPage } from 'ionic-angular';
-import { SermonSeries, Sermons } from '../../models/sermon.interface';
-import { SermonsProvider } from '../../providers/sermons/sermons';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
+import { Sermons, SermonSeries } from '../../models/sermon.interface';
+import { SermonsProvider } from '../../providers/sermons/sermons.data';
+
+export var display: string = 'bySeries';
 
 @IonicPage()
 @Component({
@@ -11,17 +13,23 @@ import { SermonsProvider } from '../../providers/sermons/sermons';
 })
 export class SermonsPage {
 
-  public sermonList: Array<SermonSeries> = [];
+  public sermonSeriesList: Array<SermonSeries> = [];
+  public sermonTitleList: any = [];
+  display: string = 'bySeries'
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sermons: SermonsProvider, private modalCtrl: ModalController) {
+  queryText: string = '';
+  items: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sermonData: SermonsProvider, private modalCtrl: ModalController) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SermonsPage');
 
-    this.sermonList = this.sermons.loadSermons();
-    console.log('Sermons from Provider: ', this.sermonList);
+    this.sermonSeriesList = this.sermonData.loadSermons();
+    console.log('Sermons from Provider: ', this.sermonSeriesList);
+
+    this.getSermon();
   }
 
   addNewSermon(): void {
@@ -36,6 +44,39 @@ export class SermonsPage {
     this.navCtrl.push('SermonDetailsPage', {
       sermon: sermon
     });
+  }
+
+  findSermon() {
+    if (this.display === 'bySeries') {
+      this.sermonSeriesList = this.sermonData.findSermonSeries(this.queryText);
+    }
+    if (this.display === 'byTitle') {
+      this.sermonTitleList = this.sermonData.findSermonTitle(this.queryText);
+    }
+  }
+
+  onSearchCancel(): void {
+    // this.getSermon();
+  }
+
+  getSermon() {
+    this.sermonTitleList = [];
+    this.sermonSeriesList.forEach(data => {
+      let result = data.sermon.map(item => {
+        return this.sermonTitleList.push(item);
+        // return item;
+      });
+      console.log('titles', this.sermonTitleList);
+    });
+  }
+
+  updateDisplay(): void {
+    if (this.display === 'bySeries') {
+      this.display = 'byTitle'
+    } else {
+      this.display = 'bySeries'
+    }
+    console.log('Display: ', this.display);
   }
 
 }

@@ -66,7 +66,7 @@ const sermonList: SermonSeries[] = [
         category: 'Gospels',
         sermon: [
             {
-                series: 'The Letters',
+                series: 'The Beatitudes',
                 title: 'Blessed are the Peaceamakers',
                 date: new Date(),
                 description: 'Sermon on the Mount - Part 3',
@@ -88,7 +88,7 @@ const sermonList: SermonSeries[] = [
             },
 
             {
-                series: 'The Letters',
+                series: 'The Beatitudes',
                 title: 'Blessed are the Cheesemakers',
                 date: new Date(),
                 description: 'Sermon on the Mount - Part 4',
