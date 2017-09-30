@@ -23,12 +23,15 @@ $colors: ( primary: #478aff, secondary: #FF9100, danger: #f53d3d, light: #f4f4f4
 // --------------------------------------------------
 // iOS only Sass variables can go here
 // App Material Design Variables
+$searchbar-ios-background-color: #FEFEFF;
+$searchbar-ios-border-color: #240088;
+$searchbar-ios-input-background-color: #F7F4F4;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 // Use the primary color as the background for the toolbar-md-background
 $toolbar-md-background: color($colors, primary);
 // Change the color of the segment button text
-$toolbar-md-active-color: #fff;
+$toolbar-md-active-color: #326AE2;
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
