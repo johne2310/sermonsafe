@@ -42,7 +42,8 @@
       <hr>
 
       <ion-row>
-        &nbsp;&nbsp;<strong>References</strong>
+        &nbsp;&nbsp;
+        <strong>References</strong>
       </ion-row>
       <ion-grid *ngFor="let ref of sermon.reference; let i = index">
         <ion-row *ngIf="ref.chapterTo">{{i+1}}.&nbsp;&nbsp;{{ ref.book }}&nbsp;{{ ref.chapterFrom }}:{{ref.verseFrom }} - {{ ref.chapterTo }}:{{ ref.verseTo
@@ -55,26 +56,39 @@
 
       <hr>
       <ion-row>
-        &nbsp;&nbsp;<strong>Locations</strong>
+        &nbsp;&nbsp;
+        <strong>Locations</strong>
       </ion-row>
-      <ion-grid *ngFor="let location of sermon.location; let i = index">
-        <ion-row>{{ i + 1}}.&nbsp;<strong>Place:</strong>&nbsp;&nbsp;{{ location.location }}</ion-row>
-        <ion-row><strong>&nbsp;&nbsp;&nbsp;&nbsp;Date:</strong>&nbsp;&nbsp;&nbsp;{{ location.date | date: 'mediumDate' }} </ion-row>
+      <!-- <ion-grid *ngFor="let location of sermon.location; let i = index">
+        <ion-row>{{ i + 1}}.&nbsp;
+          <strong>Place:</strong>&nbsp;&nbsp;{{ location.location }}</ion-row>
+        <ion-row>
+          <strong>&nbsp;&nbsp;&nbsp;&nbsp;Date:</strong>&nbsp;&nbsp;&nbsp;{{ location.date | date: 'mediumDate' }} </ion-row>
+      </ion-grid> -->
+
+      <ion-grid *ngFor="let key of locationList; let i = index">
+        <ion-row>
+          <strong>Place:</strong>&nbsp;&nbsp;{{ key }}</ion-row>
       </ion-grid>
 
     </ion-card-content>
   </ion-card>
 
   <ion-fab bottom right #fab>
-    <button ion-fab color="secondary"><ion-icon name="document"></ion-icon></button>
+    <button ion-fab color="secondary">
+      <ion-icon name="document"></ion-icon>
+    </button>
     <ion-fab-list side="left">
-      <button ion-fab color="danger" (click)="deleteSermon(fab)"><ion-icon name="md-trash"></ion-icon>
-            </button>
-
-      <button ion-fab color="light" (click)="editSermon(fab)"><ion-icon name="ios-paper-outline"></ion-icon>
+      <button ion-fab color="danger" (click)="deleteSermon(fab)">
+        <ion-icon name="md-trash"></ion-icon>
       </button>
 
-      <button ion-fab color="primary" (click)="addSermonToSeries(fab)"><ion-icon name="add-circle"></ion-icon>
+      <button ion-fab color="light" (click)="editSermon(fab)">
+        <ion-icon name="ios-paper-outline"></ion-icon>
+      </button>
+
+      <button ion-fab color="primary" (click)="addSermonToSeries(fab)">
+        <ion-icon name="add-circle"></ion-icon>
       </button>
 
     </ion-fab-list>

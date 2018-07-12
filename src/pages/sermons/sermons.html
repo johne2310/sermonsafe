@@ -3,14 +3,14 @@
   <ion-navbar color="primary" no-border-bottom>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-          </button>
+    </button>
     <ion-title>
       Sermons
     </ion-title>
 
     <ion-buttons end>
       <button ion-button icon-right (click)="addNewSermon()"> New
-        <ion-icon name="add-circle" ></ion-icon>
+        <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -62,6 +62,15 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-list>
+    <ion-item *ngFor="let sermon of sermonList | async " (click)="openSermonDetails(sermon)">
+      {{sermon.title}}
+      <p> {{sermon.series}}</p>
+    </ion-item>
+  </ion-list>
+
+
   <!-- insert list of Sermons by series-->
   <div [ngSwitch]="display">
     <ion-list *ngSwitchCase="'bySeries'">
@@ -83,13 +92,13 @@
         </ion-item>
         <ion-item-options side="right">
           <button ion-button color="dark">
-        <ion-icon name="information"></ion-icon>
-        Text
-      </button>
+            <ion-icon name="information"></ion-icon>
+            Text
+          </button>
           <button ion-button color="danger">
-        <ion-icon name="trash"></ion-icon>
-        Call
-      </button>
+            <ion-icon name="trash"></ion-icon>
+            Call
+          </button>
         </ion-item-options>
 
         <!-- </ion-item-sliding> -->
@@ -118,13 +127,13 @@
         </ion-item>
         <ion-item-options side="right">
           <button ion-button color="dark">
-        <ion-icon name="information"></ion-icon>
-        Text
-      </button>
+            <ion-icon name="information"></ion-icon>
+            Text
+          </button>
           <button ion-button color="danger">
-        <ion-icon name="trash"></ion-icon>
-        Call
-      </button>
+            <ion-icon name="trash"></ion-icon>
+            Call
+          </button>
         </ion-item-options>
 
         <!-- </ion-item-sliding> -->

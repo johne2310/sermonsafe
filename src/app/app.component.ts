@@ -1,20 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
+import { SermonsPage } from "./../pages/sermons/sermons";
+import { TabsPage } from "./../pages/tabs/tabs-page";
+import { AngularFireAuth } from "angularfire2/auth";
+import { Component, ViewChild } from "@angular/core";
 
-import { Events, MenuController, Nav, Platform } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { Events, MenuController, Nav, Platform, Tabs } from "ionic-angular";
+import { SplashScreen } from "@ionic-native/splash-screen";
 
-import { Storage } from '@ionic/storage';
+import { Storage } from "@ionic/storage";
 
-import { ConferenceData } from '../providers/conference-data';
-import { UserData } from '../providers/user-data';
-import { APP_PAGES } from './../menus/appPages';
-import { LOGGED_IN_PAGES } from '../menus/loggedInPages';
-import { LOGGED_OUT_PAGES } from '../menus/loggedOutPages';
+import { UserData } from "../providers/user-data";
+import { APP_PAGES } from "../menus/appPages";
+import { LOGGED_IN_PAGES } from "../menus/loggedInPages";
+import { LOGGED_OUT_PAGES } from "../menus/loggedOutPages";
 import { PageInterface } from "../models/page.interface";
 
-
 @Component({
-  templateUrl: 'app.template.html'
+  templateUrl: "app.template.html"
 })
 export class SermonSafeApp {
   // the root nav is a child of the root app component
@@ -29,44 +30,50 @@ export class SermonSafeApp {
   loggedInPages: PageInterface[] = [];
   loggedOutPages: PageInterface[] = [];
 
-
-  rootPage: string;
+  rootPage: any;
 
   constructor(
     public events: Events,
     public userData: UserData,
     public menu: MenuController,
     public platform: Platform,
-    public confData: ConferenceData,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    afAuth: AngularFireAuth
   ) {
+    //check auth state and direct page route depending on whether the user is logged in
+
+    afAuth.authState.subscribe(user => {
+      if (user) {
+        this.rootPage = "TabsPage";
+
+        // decide which menu items should be hidden by current login status stored in local storage
+
+        // this.enableMenu(hasLoggedIn === true);
+        this.enableMenu(true);
+
+        this.listenToLoginEvents();
+      } else {
+        console.log("Changing page to login page");
+        this.rootPage = "LoginPage";
+      }
+    });
 
     this.appPages = APP_PAGES;
     this.loggedInPages = LOGGED_IN_PAGES;
     this.loggedOutPages = LOGGED_OUT_PAGES;
 
+    this.platformReady();
+
     // Check if the user has already seen the tutorial
-    this.storage.get('hasSeenTutorial')
-      .then((hasSeenTutorial) => {
-        if (hasSeenTutorial) {
-          this.rootPage = 'TabsPage';
-        } else {
-          this.rootPage = 'TutorialPage';
-        }
-        this.platformReady()
-      });
+    // this.storage.get("hasSeenTutorial").then(hasSeenTutorial => {
+    //   if (hasSeenTutorial) {
+    //     this.rootPage = "TabsPage";
+    //   } else {
+    //     this.rootPage = "TutorialPage";
+    //   }
 
-    // load the conference data
-    confData.load();
-
-    // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
-    });
-    this.enableMenu(true);
-
-    this.listenToLoginEvents();
+    // });
   }
 
   openPage(page: PageInterface) {
@@ -98,26 +105,26 @@ export class SermonSafeApp {
   }
 
   openTutorial() {
-    this.nav.setRoot('TutorialPage');
+    this.nav.setRoot("TutorialPage");
   }
 
   listenToLoginEvents() {
-    this.events.subscribe('user:login', () => {
+    this.events.subscribe("user:login", () => {
       this.enableMenu(true);
     });
 
-    this.events.subscribe('user:signup', () => {
+    this.events.subscribe("user:signup", () => {
       this.enableMenu(true);
     });
 
-    this.events.subscribe('user:logout', () => {
+    this.events.subscribe("user:logout", () => {
       this.enableMenu(false);
     });
   }
 
   enableMenu(loggedIn: boolean) {
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
+    this.menu.enable(loggedIn, "loggedInMenu");
+    this.menu.enable(!loggedIn, "loggedOutMenu");
   }
 
   platformReady() {
@@ -132,14 +139,17 @@ export class SermonSafeApp {
 
     // Tabs are a special case because they have their own navigation
     if (childNav) {
-      if (childNav.getSelected() && childNav.getSelected().root === page.tabName) {
-        return 'primary';
+      if (
+        childNav.getSelected() &&
+        childNav.getSelected().root === page.tabName
+      ) {
+        return "primary";
       }
       return;
     }
 
     if (this.nav.getActive() && this.nav.getActive().name === page.name) {
-      return 'primary';
+      return "primary";
     }
     return;
   }

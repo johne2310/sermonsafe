@@ -1,4 +1,4 @@
-import { PageInterface } from './../models/page.interface';
+import { PageInterface } from '../models/page.interface';
 
 const loggedInPages: PageInterface[] = [
     {
